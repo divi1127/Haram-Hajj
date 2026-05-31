@@ -436,6 +436,8 @@ h1, h2, h3, h4, h5 {
   .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .section-title { font-size: 1.8rem; }
   .btn { padding: 0.65rem 1.4rem; font-size: 0.88rem; }
+  .container { padding: 0 1rem; }
+  .whatsapp-float { bottom: 1.25rem; right: 1.25rem; width: 52px; height: 52px; }
 }
 
 /* ─── Page Transition ────────────────────────────────────────────── */

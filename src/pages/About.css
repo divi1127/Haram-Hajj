@@ -4,6 +4,7 @@
 .page-hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -428,6 +429,7 @@
   .contact-grid { grid-template-columns: 1fr; }
   .packages-full-grid { grid-template-columns: 1fr; }
   .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .page-hero { background-attachment: scroll; }
 }
 @media (max-width: 640px) {
   .about-story-stats { grid-template-columns: 1fr 1fr; }
@@ -436,4 +438,10 @@
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: 1fr; }
   .blog-grid { grid-template-columns: 1fr; }
+  .proprietor-card { padding: 1.5rem; }
+  .prop-name { font-size: 1.5rem; }
+  .contact-form-card { padding: 1.5rem; }
+  .branch-card-body { padding: 1rem; }
+  .comparison-table { font-size: 0.78rem; }
+  .comparison-table th, .comparison-table td { padding: 0.6rem 0.5rem; }
 }

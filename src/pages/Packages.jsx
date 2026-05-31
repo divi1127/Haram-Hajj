@@ -52,7 +52,7 @@ export default function Packages() {
         className="page-hero"
         style={{ backgroundImage: `linear-gradient(rgba(4,20,10,0.75), rgba(4,20,10,0.85)), url(${packagesHero})` }}
       >
-        <div className="container page-hero-content" style={{ display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', minHeight:'420px', justifyContent:'center' }}>
+        <div className="container page-hero-content" style={{ display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', minHeight:'100svh', justifyContent:'center' }}>
           <h1 className="section-title" style={{ color:'#fff', fontSize:'clamp(2rem,4.5vw,3.5rem)', textShadow:'0 4px 20px rgba(0,0,0,0.5)', marginBottom:'1rem' }}>
             {t('packages.hero.title')} <span className="gold-text">{t('packages.hero.goldTitle')}</span>
           </h1>
@@ -75,80 +75,59 @@ export default function Packages() {
             
             {/* Left Column: Details */}
             <div className="pkg-details-view" key={activePkg.id}>
-              {/* Header Tab */}
               <div className="details-header" style={{ background: activePkg.headerBg || activePkg.color }}>
                 {activePkg.popular && (
-                  <div style={{
-                    position: 'absolute', top: 0, right: '2rem',
-                    background: '#f59e0b', color: '#000',
-                    padding: '0.4rem 1rem', borderRadius: '0 0 12px 12px',
-                    fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase'
-                  }}>
-                    <Star size={12} fill="#000" className="inline-icon" /> Most Popular
+                  <div className="details-popular-tag">
+                    <Star size={11} fill="#000" /> Most Popular
                   </div>
                 )}
-                <span className="section-tag" style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', border: '1px solid rgba(255,255,255,0.3)', marginBottom: '1rem' }}>
-                  {activePkg.badge}
-                </span>
-                <h3 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  {activePkg.name}
-                </h3>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem' }}>
-                  <span style={{ fontSize: '3.5rem', fontWeight: 900 }}>{activePkg.price}</span>
-                  <span style={{ fontSize: '1.1rem', opacity: 0.8, fontWeight: 600 }}>/ {activePkg.duration} Full Trip</span>
+                <div className="details-header-badge">{activePkg.badge}</div>
+                <h3 className="details-header-name">{activePkg.name}</h3>
+                <div className="details-header-price">
+                  <span className="details-price-amount">{activePkg.price}</span>
+                  <span className="details-price-label">/ {activePkg.duration} Full Trip</span>
                 </div>
               </div>
 
-              {/* Airlines Section */}
               <div className="details-airline-box">
-                <p style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#94a3b8', letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Plane size={14} /> Available Airlines
-                </p>
+                <p className="details-airline-label"><Plane size={13} /> Available Airlines</p>
                 <div className="airline-grid">
                   {(activePkg.airlines || []).map((airline, i) => (
-                    <span key={i} style={{ 
-                      color: airline.color, 
-                      fontSize: '1.1rem', 
-                      fontWeight: 800,
-                      fontStyle: airline.name === 'AirArabia' ? 'italic' : 'normal'
-                    }}>
+                    <span key={i} style={{ color: airline.color, fontSize: '1rem', fontWeight: 800, fontStyle: airline.name === 'AirArabia' ? 'italic' : 'normal' }}>
                       {airline.name}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Features & Content */}
               <div className="details-body">
-                <h4 style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: '1.5rem' }}>
-                  Package Inclusions & Features
-                </h4>
-                
+                <h4 className="details-body-title">Package Inclusions & Features</h4>
                 <ul className="feature-list-long">
                   {activePkg.features.map((f, i) => (
                     <li key={i} className="feature-item">
-                      <Check size={18} className="icon-check" />
-                      {f}
+                      <Check size={16} className="icon-check" />{f}
                     </li>
                   ))}
                   {activePkg.notIncluded.map((f, i) => (
                     <li key={`n${i}`} className="feature-item" style={{ opacity: 0.4 }}>
-                      <X size={18} className="icon-cross" />
-                      {f}
+                      <X size={16} className="icon-cross" />{f}
                     </li>
                   ))}
                 </ul>
-
                 <div className="details-actions">
-                  <a 
+                  <a
                     href={`https://wa.me/${SITE.whatsapp.replace(/\D/g,'')}?text=I'm interested in the ${activePkg.name}`}
                     target="_blank" rel="noopener noreferrer"
-                    className="btn btn-whatsapp" 
-                    style={{ flex: 1, justifyContent: 'center', padding: '1.25rem' }}
+                    className="btn btn-whatsapp"
+                    style={{ flex: 1, justifyContent: 'center' }}
                   >
-                    <MessageCircle size={20} /> Book This Package via WhatsApp
+                    <MessageCircle size={18} /> Book via WhatsApp
                   </a>
-                  <Link to="/contact" className="btn btn-outline" style={{ flex: 1, justifyContent: 'center', padding: '1.25rem', borderColor: activePkg.headerBg || activePkg.color, color: activePkg.headerBg || activePkg.color }}>
+                  <Link
+                    to="/contact"
+                    className="btn btn-outline"
+                    style={{ flex: 1, justifyContent: 'center', borderColor: activePkg.headerBg || activePkg.color, color: activePkg.headerBg || activePkg.color }}
+                  >
                     Request Custom Quote
                   </Link>
                 </div>
@@ -158,29 +137,24 @@ export default function Packages() {
             {/* Right Column: Sidebar Tabs */}
             <div className="pkg-sidebar">
               {PACKAGES.map(pkg => (
-                <button 
-                  key={pkg.id} 
+                <button
+                  key={pkg.id}
                   className={`pkg-tab-btn ${activePkgId === pkg.id ? 'active' : ''}`}
                   onClick={() => setActivePkgId(pkg.id)}
                 >
                   <span className="tab-btn-name">{pkg.name.replace(' Package', '')}</span>
-                  <span className="tab-btn-price">Starting from {pkg.price}</span>
+                  <span className="tab-btn-price">From {pkg.price}</span>
                   {pkg.popular && (
-                    <span style={{ position: 'absolute', top: '10px', right: '10px', color: '#f59e0b' }}>
-                      <Star size={14} fill="#f59e0b" />
+                    <span style={{ position: 'absolute', top: '8px', right: '8px', color: '#f59e0b' }}>
+                      <Star size={13} fill="#f59e0b" />
                     </span>
                   )}
                 </button>
               ))}
-              
-              <div style={{ marginTop: '1rem', padding: '1.5rem', background: 'var(--emerald-deep)', borderRadius: 'var(--radius-md)', color: '#fff' }}>
-                <h5 style={{ fontWeight: 800, marginBottom: '0.5rem' }}>Need Help?</h5>
-                <p style={{ fontSize: '0.85rem', opacity: 0.8, lineHeight: 1.5, marginBottom: '1rem' }}>
-                  Our expert advisors are available to help you choose the best plan for your spiritual journey.
-                </p>
-                <a href={`tel:${SITE.phone[0]}`} style={{ color: 'var(--gold-400)', fontWeight: 700, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Phone size={14} /> {SITE.phone[0]}
-                </a>
+              <div className="pkg-help-box">
+                <h5>Need Help?</h5>
+                <p>Our advisors help you choose the best plan for your spiritual journey.</p>
+                <a href={`tel:${SITE.phone[0]}`}><Phone size={13} /> {SITE.phone[0]}</a>
               </div>
             </div>
 

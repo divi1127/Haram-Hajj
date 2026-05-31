@@ -358,12 +358,15 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .nav-links { display: none; }
-  .nav-social { display: none; }
-  .nav-cta    { display: none; }
-  .hamburger  { display: flex; }
+  .nav-links    { display: none; }
+  .nav-social   { display: none; }
+  .nav-cta      { display: none; }
+  .navbar-right { display: none; }
+  .hamburger    { display: flex; }
 }
 
 @media (max-width: 480px) {
-  .mobile-menu { width: 280px; }
+  .mobile-menu { width: 100%; right: -100%; }
+  .navbar-inner { padding: 0 1rem; }
+  .logo-main { font-size: 1rem; }
 }
